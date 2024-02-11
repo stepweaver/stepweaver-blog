@@ -63,46 +63,31 @@ router.post(
     } = req.body;
 
     // Build profile object
-    const profileFields = {};
-    profileFields.user = req.user.id;
-
-    if (company) profileFields.company = company;
-    if (website) profileFields.website = website;
-    if (location) profileFields.location = location;
-    if (bio) profileFields.bio = bio;
-    if (status) profileFields.status = status;
-    if (githubusername) profileFields.githubusername = githubusername;
-    if (skills) {
-      profileFields.skills = skills.split(',').map((skill) => skill.trim());
-    }
-
-    // Build social object
-    profileFields.social = {};
-
-    if (youtube) profileFields.social.youtube = youtube;
-    if (twitter) profileFields.social.twitter = twitter;
-    if (facebook) profileFields.social.facebook = facebook;
-    if (linkedin) profileFields.social.linkedin = linkedin;
-    if (instagram) profileFields.social.instagram = instagram;
+    const profileFields = {
+      user: req.user.id,
+      company,
+      website,
+      location,
+      bio,
+      status,
+      githubusername,
+      skills: skills ? skills.split(',').map((skill) => skill.trim()) : undefined,
+      social: {
+        youtube,
+        twitter,
+        facebook,
+        linkedin,
+        instagram
+      }
+    };
 
     try {
-      let profile = await Profile.findOne({ user: req.user.id });
-
-      if (profile) {
-        // Update
-        profile = await Profile.findOneAndUpdate(
-          { user: req.user.id },
-          { $set: profileFields },
-          { new: true }
-        );
-
-        return res.json(profile);
-      }
-
-      // Create profile
-      profile = new Profile(profileFields);
-
-      await profile.save();
+      // Update or create profile
+      let profile = await Profile.findOneAndUpdate(
+        { user: req.user.id },
+        { $set: profileFields },
+        { new: true, upsert: true }
+      );
 
       res.json(profile);
     } catch (err) {
