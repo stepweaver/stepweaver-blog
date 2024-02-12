@@ -1,10 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Global Styles */
 :root {
-  --primary-color: #17a2b8;
+  --primary-color: #FF5200;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
-  --danger-color: #dc3545;
+  --danger-color: #f5000c;
   --success-color: #28a745;
+  background-color: #343a40
 }
 
 * {
