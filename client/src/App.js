@@ -4,6 +4,7 @@ import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import Alert from './components/layout/Alert';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -20,6 +21,7 @@ const App = () => (
           path='/register'
           element={
             <section className='container'>
+              <Alert />
               <Register />
             </section>
           }
@@ -28,6 +30,7 @@ const App = () => (
           path='/login'
           element={
             <section className='container'>
+              <Alert />
               <Login />
             </section>
           }

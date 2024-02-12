@@ -9,7 +9,7 @@
   --light-color: #f4f4f4;
   --danger-color: #f5000c;
   --success-color: #28a745;
-  background-color: #343a40
+  background-color: #343a40;
 }
 
 * {
@@ -22,7 +22,7 @@ body {
   font-family: 'Hack', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
-  background-color: #fff;
+  background-color: var(--dark-color);
   color: #333;
 }
 
@@ -77,6 +77,10 @@ img {
 
 .text-dark {
   color: var(--dark-color);
+}
+
+.text-light {
+  color: var(--light-color);
 }
 
 /* Padding */
@@ -261,6 +265,7 @@ img {
   padding: 0.4rem;
   font-size: 1.2rem;
   border: 1px solid #ccc;
+  color: #ccc;
 }
 
 .form input[type='submit'],
