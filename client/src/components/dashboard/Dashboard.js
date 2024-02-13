@@ -28,7 +28,7 @@ const Dashboard = () => {
         <>
           <p className='text-light'>You have not yet setup a profile. Please add some info!</p>
           <Link
-            to='/creat-profile'
+            to='/create-profile'
             className='btn bg-primary my-1 hover:bg-orange-600'
           >
             Create Profile

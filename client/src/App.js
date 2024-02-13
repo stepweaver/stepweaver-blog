@@ -7,6 +7,7 @@ import Login from './components/auth/Login';
 import Alert from './components/layout/Alert';
 import Dashboard from './components/dashboard/Dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
+import ProfileForm from './components/profile-forms/ProfileForm';
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -54,6 +55,16 @@ const App = () => {
               <section className='container'>
                 <PrivateRoute>
                   <Dashboard />
+                </PrivateRoute>
+              </section>
+            }
+          />
+          <Route
+            path='/create-profile'
+            element={
+              <section className='container'>
+                <PrivateRoute>
+                  <ProfileForm />
                 </PrivateRoute>
               </section>
             }
