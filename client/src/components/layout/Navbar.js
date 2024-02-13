@@ -12,6 +12,12 @@ const Navbar = () => {
   const authLinks = (
     <ul>
       <li>
+        <Link to='/dashboard'>
+          <i className='fas fa-user'></i>{' '}
+          <span className='hide-sm'>Dashboard</span>
+        </Link>
+      </li>
+      <li>
         <a onClick={() => dispatch(logout())} href='#!'>
           <i className='fas fa-sign-out-alt'></i>{' '}
           <span className='hide-sm'>Logout</span>
@@ -37,8 +43,8 @@ const Navbar = () => {
   return (
     <nav className='navbar bg-dark'>
       <h1 className='text-xl font-semibold'>
-        <Link to='/'>
-          <i className='fas fa-code'></i> DevConnector
+        <Link to={isAuthenticated ? '/dashboard' : '/'}>
+          <i className='fas fa-code'></i> DevConnect
         </Link>
       </h1>
       {!loading && <>{isAuthenticated ? authLinks : guestLinks}</>}
