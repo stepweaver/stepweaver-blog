@@ -136,7 +136,7 @@ img {
 }
 
 .btn {
-  display: inline-block;
+  display: inline-flex;
   background: var(--light-color);
   color: #333;
   padding: 0.4rem 1.3rem;
