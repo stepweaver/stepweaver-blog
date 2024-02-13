@@ -54,6 +54,7 @@ const App = () => {
             element={
               <section className='container'>
                 <PrivateRoute>
+                  <Alert />
                   <Dashboard />
                 </PrivateRoute>
               </section>

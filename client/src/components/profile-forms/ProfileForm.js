@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveProfile, getCurrentProfile } from '../../actions/profile';
 
-const ProfileForm = () => {
+const ProfileForm = ({ edit = false }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const profile = useSelector(state => state.profile.profile);
+
   const [formData, setFormData] = useState({
     company: '',
     website: '',
@@ -16,8 +22,6 @@ const ProfileForm = () => {
     youtube: '',
     instagram: ''
   });
-
-  const [displaySocialInputs, toggleSocialInputs] = useState(false);
 
   const {
     company,
@@ -34,8 +38,22 @@ const ProfileForm = () => {
     instagram
   } = formData;
 
+  const [displaySocialInputs, toggleSocialInputs] = useState(false);
+
+  useEffect(() => {
+    if (edit) {
+      dispatch(getCurrentProfile());
+      setFormData(profile);
+    }
+  }, [dispatch, edit, profile]);
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await dispatch(saveProfile(formData, navigate));
+  };
 
   return (
     <>
@@ -45,10 +63,10 @@ const ProfileForm = () => {
         to make your profile stand out
       </p>
       <small className='text-light'>* = required field</small>
-      <form className='form'>
+      <form className='form' onSubmit={onSubmit}>
         <div className='form-group'>
-          <select name='status'>
-            <option value='0' value={status} onChange={(e) => onChange(e)}>
+          <select name='status' value={status} onChange={(e) => onChange(e)}>
+            <option value='0'>
               * Select Professional Status
             </option>
             <option value='Developer'>Developer</option>

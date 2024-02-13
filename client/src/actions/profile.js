@@ -26,3 +26,42 @@ export const getCurrentProfile = () => async (dispatch) => {
     });
   }
 };
+
+// Save profile
+export const saveProfile =
+  (formData, navigate, isUpdate = false) =>
+  async (dispatch) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+
+      const res = await axios.post('/api/profile', formData, config);
+
+      dispatch({
+        type: isUpdate ? UPDATE_PROFILE : GET_PROFILE,
+        payload: res.data
+      });
+
+      dispatch(
+        setAlert(isUpdate ? 'Profile Updated' : 'Profile Created', 'success')
+      );
+
+      if (!isUpdate) {
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      const errors = err.response.data.errors;
+
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+      }
+
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      });
+    }
+  };

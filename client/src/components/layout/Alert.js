@@ -10,8 +10,6 @@ const Alert = () => {
         {alert.msg}
       </div>
     ));
-
-  return <div>Alert</div>;
 };
 
 export default Alert;
