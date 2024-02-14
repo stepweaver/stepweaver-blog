@@ -5,7 +5,7 @@ import Spinner from '../layout/Spinner';
 import DashboardActions from './DashboardActions';
 import Experience from './Experience';
 import Education from './Education';
-import { getCurrentProfile } from '../../actions/profile';
+import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -30,10 +30,20 @@ const Dashboard = () => {
           <DashboardActions />
           <Experience experience={profile.experience} />
           <Education education={profile.education} />
+          <div className='my-2'>
+            <button
+              className='btn btn-sm bg-danger hover:bg-red-600'
+              onClick={() => dispatch(deleteAccount())}
+            >
+              <i className='fas fa-user-minus'></i> Delete My Account
+            </button>
+          </div>
         </>
       ) : (
         <>
-          <p className='text-light'>You have not yet setup a profile. Please add some info!</p>
+          <p className='text-light'>
+            You have not yet setup a profile. Please add some info!
+          </p>
           <Link
             to='/create-profile'
             className='btn bg-primary my-1 hover:bg-orange-600'

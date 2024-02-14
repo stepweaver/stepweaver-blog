@@ -1,7 +1,11 @@
 import React from 'react';
 import Moment from 'react-moment';
+import { useDispatch } from 'react-redux';
+import { deleteEducation } from '../../actions/profile';
 
 const Education = ({ education }) => {
+  const dispatch = useDispatch();
+
   const educations = education.map((edu) => (
     <tr key={edu._id}>
       <td>{edu.school}</td>
@@ -15,7 +19,12 @@ const Education = ({ education }) => {
         )}
       </td>
       <td>
-        <button className='btn btn-sm bg-danger hover:bg-red-600'>Delete</button>
+        <button
+          className='btn btn-sm bg-danger hover:bg-red-600'
+          onClick={() => dispatch(deleteEducation(edu._id))}
+        >
+          Delete
+        </button>
       </td>
     </tr>
   ));
