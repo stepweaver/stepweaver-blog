@@ -67,6 +67,7 @@ const App = () => {
             element={
               <section className='container'>
                 <PrivateRoute>
+                  <Alert />
                   <ProfileForm />
                 </PrivateRoute>
               </section>
@@ -77,6 +78,7 @@ const App = () => {
             element={
               <section className='container'>
                 <PrivateRoute>
+                  <Alert />
                   <ProfileForm />
                 </PrivateRoute>
               </section>
@@ -87,6 +89,7 @@ const App = () => {
             element={
               <section className='container'>
                 <PrivateRoute>
+                  <Alert />
                   <AddExperience />
                 </PrivateRoute>
               </section>
@@ -97,6 +100,7 @@ const App = () => {
             element={
               <section className='container'>
                 <PrivateRoute>
+                  <Alert />
                   <AddEducation />
                 </PrivateRoute>
               </section>

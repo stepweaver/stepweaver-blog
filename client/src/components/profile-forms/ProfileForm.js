@@ -100,7 +100,7 @@ const ProfileForm = () => {
 
   return (
     <>
-      <h1 className='large text-primary'>
+      <h1 className='large text-primary font-semibold'>
         {creatingProfile ? `Create Your Profile` : `Edit Your Profile`}
       </h1>
       <p className='lead text-light'>

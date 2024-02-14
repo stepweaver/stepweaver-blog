@@ -34,12 +34,12 @@ const AddEducation = () => {
 
   return (
     <section className='container'>
-      <h1 className='large text-primary'>Add Your Education</h1>
-      <p className='lead'>
+      <h1 className='large text-primary font-semibold'>Add Your Education</h1>
+      <p className='lead text-light'>
         <i className='fas fa-code-branch text-primary'></i> Add any school or
-        bootcamp that you have attended
+        bootcamp you have attended
       </p>
-      <small>* = required field</small>
+      <small className='text-light'>* = required field</small>
       <form className='form' onSubmit={onSubmit}>
         <div className='form-group'>
           <input
@@ -71,10 +71,10 @@ const AddEducation = () => {
           />
         </div>
         <div className='form-group'>
-          <h4>From Date</h4>
+          <h4 className='text-light'>From Date</h4>
           <input type='date' name='from' value={from} onChange={onChange} />
         </div>
-        <div className='form-group'>
+        <div className='form-group text-light'>
           <p>
             <input
               type='checkbox'
@@ -89,7 +89,7 @@ const AddEducation = () => {
             Current School or Bootcamp
           </p>
         </div>
-        <div className='form-group'>
+        <div className='form-group text-light'>
           <h4>To Date</h4>
           <input
             type='date'

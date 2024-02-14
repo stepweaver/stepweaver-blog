@@ -36,7 +36,7 @@ const AddExperience = () => {
       <h1 className='large text-primary font-semibold'>Add An Experience</h1>
       <p className='lead text-light'>
         <i className='fas fa-code-branch text-primary'></i> Add any
-        developer/programming positions that you have had in the past
+        developer/programming experience
       </p>
       <small className='text-light'>* = required field</small>
       <form className='form' onSubmit={onSubmit}>
