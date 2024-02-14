@@ -1,27 +1,67 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { saveProfile, getCurrentProfile } from '../../actions/profile';
+import { Link, useMatch, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  updateProfile,
+  createProfile,
+  getCurrentProfile
+} from '../../actions/profile';
 
-const ProfileForm = ({ edit = false }) => {
-  const dispatch = useDispatch();
+const initialState = {
+  company: '',
+  website: '',
+  location: '',
+  status: '',
+  skills: '',
+  githubusername: '',
+  bio: '',
+  twitter: '',
+  facebook: '',
+  linkedin: '',
+  youtube: '',
+  instagram: ''
+};
+
+const ProfileForm = () => {
+  const [formData, setFormData] = useState(initialState);
+  const [displaySocialInputs, toggleSocialInputs] = useState(false);
+
+  const { profile, loading } = useSelector((state) => state.profile);
+
   const navigate = useNavigate();
-  const profile = useSelector(state => state.profile.profile);
+  const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
-    company: '',
-    website: '',
-    location: '',
-    status: '',
-    skills: '',
-    githubusername: '',
-    bio: '',
-    twitter: '',
-    facebook: '',
-    linkedin: '',
-    youtube: '',
-    instagram: ''
-  });
+  const creatingProfile = useMatch('/create-profile');
+
+  useEffect(() => {
+    if (!profile) dispatch(getCurrentProfile());
+    if (!loading && profile) {
+      const profileData = { ...initialState };
+      for (const key in profile) {
+        if (key in profileData) profileData[key] = profile[key];
+      }
+      for (const key in profile.social) {
+        if (key in profileData) profileData[key] = profile.social[key];
+      }
+      if (Array.isArray(profileData.skills))
+        profileData.skills = profileData.skills.join(', ');
+      setFormData({
+        company: loading || !profileData.company ? '' : profileData.company,
+        website: loading || !profileData.website ? '' : profileData.website,
+        location: loading || !profileData.location ? '' : profileData.location,
+        status: loading || !profileData.status ? '' : profileData.status,
+        skills: loading || !profileData.skills ? '' : profileData.skills,
+        githubusername:
+          loading || !profileData.githubusername ? '' : profileData.githubusername,
+        bio: loading || !profileData.bio ? '' : profileData.bio,
+        twitter: loading || !profileData.twitter ? '' : profileData.twitter,
+        facebook: loading || !profileData.facebook ? '' : profileData.facebook,
+        linkedin: loading || !profileData.linkedin ? '' : profileData.linkedin,
+        youtube: loading || !profileData.youtube ? '' : profileData.youtube,
+        instagram: loading || !profileData.instagram ? '' : profileData.instagram
+      });
+    }
+  }, [dispatch, loading, profile]);
 
   const {
     company,
@@ -38,37 +78,39 @@ const ProfileForm = ({ edit = false }) => {
     instagram
   } = formData;
 
-  const [displaySocialInputs, toggleSocialInputs] = useState(false);
-
-  useEffect(() => {
-    if (edit) {
-      dispatch(getCurrentProfile());
-      setFormData(profile);
-    }
-  }, [dispatch, edit, profile]);
-
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    await dispatch(saveProfile(formData, navigate));
+
+    if (creatingProfile) {
+      dispatch(createProfile(formData));
+    } else {
+      dispatch(updateProfile(formData));
+    }
+
+    navigate('/dashboard');
   };
+
+  let buttonText = creatingProfile ? 'Create Profile' : 'Update Profile';
 
   return (
     <>
-      <h1 className='large text-primary'>Create Your Profile</h1>
+      <h1 className='large text-primary'>
+        {creatingProfile ? `Create Your Profile` : `Edit Your Profile`}
+      </h1>
       <p className='lead text-light'>
-        <i className='fas fa-user text-primary'></i> Let's get some information
-        to make your profile stand out
+        <i className='fas fa-user text-primary'></i>
+        {creatingProfile
+          ? ` Let's get some information to make your`
+          : ` Add some changes to your profile`}
       </p>
       <small className='text-light'>* = required field</small>
-      <form className='form' onSubmit={onSubmit}>
+      <form className='form' onSubmit={(e) => onSubmit(e)}>
         <div className='form-group'>
           <select name='status' value={status} onChange={(e) => onChange(e)}>
-            <option value='0'>
-              * Select Professional Status
-            </option>
+            <option value='0'>* Select Professional Status</option>
             <option value='Developer'>Developer</option>
             <option value='Junior Developer'>Junior Developer</option>
             <option value='Senior Developer'>Senior Developer</option>
@@ -157,7 +199,7 @@ const ProfileForm = ({ edit = false }) => {
           <button
             onClick={() => toggleSocialInputs(!displaySocialInputs)}
             type='button'
-            className='btn bg-light hover:bg-gray-300'
+            className='btn bg-light text-dark hover:bg-gray-300'
           >
             Add Social Network Links
           </button>
@@ -225,9 +267,13 @@ const ProfileForm = ({ edit = false }) => {
 
         <input
           type='submit'
-          className='btn bg-primary my-1 hover:bg-orange-600'
+          value={buttonText}
+          className='btn bg-primary text-light hover:bg-orange-600 my-1'
         />
-        <Link to='/dashboard' className='btn bg-light my-1 hover:bg-gray-300'>
+        <Link
+          className='btn bg-light text-dark hover:bg-gray-300 my-1'
+          to='/dashboard'
+        >
           Go Back
         </Link>
       </form>

@@ -27,41 +27,64 @@ export const getCurrentProfile = () => async (dispatch) => {
   }
 };
 
-// Save profile
-export const saveProfile =
-  (formData, navigate, isUpdate = false) =>
-  async (dispatch) => {
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-
-      const res = await axios.post('/api/profile', formData, config);
-
-      dispatch({
-        type: isUpdate ? UPDATE_PROFILE : GET_PROFILE,
-        payload: res.data
-      });
-
-      dispatch(
-        setAlert(isUpdate ? 'Profile Updated' : 'Profile Created', 'success')
-      );
-
-      if (!isUpdate) {
-        navigate('/dashboard');
+// Create profile
+export const createProfile = (formData, navigate) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
       }
-    } catch (err) {
-      const errors = err.response.data.errors;
+    };
 
-      if (errors) {
-        errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
-      }
+    const res = await axios.post('/api/profile', formData, config);
 
-      dispatch({
-        type: PROFILE_ERROR,
-        payload: { msg: err.response.statusText, status: err.response.status }
-      });
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Profile Created', 'success'));
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
     }
-  };
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Update profile
+export const updateProfile = (formData) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    const res = await axios.post('/api/profile', formData, config);
+
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Profile Updated', 'success'));
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors) {
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'danger')));
+    }
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};

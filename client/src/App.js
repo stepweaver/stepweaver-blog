@@ -70,6 +70,16 @@ const App = () => {
               </section>
             }
           />
+          <Route
+            path='/edit-profile'
+            element={
+              <section className='container'>
+                <PrivateRoute>
+                  <ProfileForm />
+                </PrivateRoute>
+              </section>
+            }
+          />
         </Routes>
       </Router>
     </Provider>
