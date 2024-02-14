@@ -52,13 +52,16 @@ const ProfileForm = () => {
         status: loading || !profileData.status ? '' : profileData.status,
         skills: loading || !profileData.skills ? '' : profileData.skills,
         githubusername:
-          loading || !profileData.githubusername ? '' : profileData.githubusername,
+          loading || !profileData.githubusername
+            ? ''
+            : profileData.githubusername,
         bio: loading || !profileData.bio ? '' : profileData.bio,
         twitter: loading || !profileData.twitter ? '' : profileData.twitter,
         facebook: loading || !profileData.facebook ? '' : profileData.facebook,
         linkedin: loading || !profileData.linkedin ? '' : profileData.linkedin,
         youtube: loading || !profileData.youtube ? '' : profileData.youtube,
-        instagram: loading || !profileData.instagram ? '' : profileData.instagram
+        instagram:
+          loading || !profileData.instagram ? '' : profileData.instagram
       });
     }
   }, [dispatch, loading, profile]);
