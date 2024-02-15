@@ -13,7 +13,6 @@ const ProfileGithub = ({ username }) => {
 
   return (
     <div className='profile-github'>
-      <h2 className='text-primary font-semibold text-2xl my-2'>Github Repos</h2>
       {repos === null ? (
         <Spinner />
       ) : (
