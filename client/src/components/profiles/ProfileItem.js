@@ -12,7 +12,7 @@ const ProfileItem = ({
 }) => {
   
   return (
-    <div className='profile bg-gradient-to-r from-orange-700/5 to-slate-950/95 shadow-lg shadow-black rounded-xl'>
+    <div className='profile bg-gradient-to-r from-orange-700/5 to-slate-950/95 hover:shadow-lg hover:shadow-black rounded-xl'>
       <img src={avatar} alt='' className='round-img shadow-lg shadow-black' />
       <div>
         <h2 className='text-light'>{name}</h2>
