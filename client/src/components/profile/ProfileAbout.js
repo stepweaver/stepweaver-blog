@@ -8,7 +8,7 @@ const ProfileAbout = ({
   }
 }) => {
   return (
-    <div className='profile-about text-light p-2'>
+    <div className='profile-about text-light p-1'>
       {bio && (
         <>
           <h2 className='text-primary font-semibold text-xl'>

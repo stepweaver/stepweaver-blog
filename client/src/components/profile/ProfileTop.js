@@ -11,7 +11,7 @@ const ProfileTop = ({
   }
 }) => {
   return (
-    <div className='profile-top p-2 text-light'>
+    <div className='profile-top p-1 text-light'>
       <img className='round-img my-1 shadow-lg shadow-black' src={avatar} alt='' />
       <h1 className='large font-semibold'>{name}</h1>
       <p className='lead'>
