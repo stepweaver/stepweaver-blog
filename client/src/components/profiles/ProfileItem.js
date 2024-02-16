@@ -10,7 +10,6 @@ const ProfileItem = ({
     skills
   }
 }) => {
-  
   return (
     <div className='profile bg-gradient-to-r from-orange-700/5 to-slate-950/95 hover:shadow-lg hover:shadow-black rounded-xl'>
       <img src={avatar} alt='' className='round-img shadow-lg shadow-black' />
@@ -20,7 +19,10 @@ const ProfileItem = ({
           {status} {company && <span> at {company}</span>}
         </p>
         <p className='my-1 text-light'>{location && <span>{location}</span>}</p>
-        <Link to={`/profile/${_id}`} className='btn btn-sm bg-primary hover:bg-orange-600'>
+        <Link
+          to={`/profile/${_id}`}
+          className='btn btn-sm bg-primary hover:bg-orange-600'
+        >
           View Profile
         </Link>
       </div>

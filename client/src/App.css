@@ -466,7 +466,7 @@ button {
 /* Posts Page */
 .post-form .post-form-header {
   background: var(--primary-color);
-  padding: 0.5rem;
+  padding: 0.5rem
 }
 
 .post {
@@ -477,11 +477,14 @@ button {
 }
 
 .post > div:first-child {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .post img {
-  width: 100px;
+  width: 125px;
 }
 
 .post .comment-count {
@@ -493,7 +496,6 @@ button {
 }
 
 .post .post-date {
-  color: #aaa;
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
 }
