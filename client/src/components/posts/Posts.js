@@ -13,6 +13,8 @@ const Post = () => {
     dispatch(getPosts());
   }, [dispatch]);
 
+  // TODO: Sort posts by date, ascending
+
   return (
     <>
       {loading ? (
