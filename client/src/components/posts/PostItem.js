@@ -13,7 +13,7 @@ const PostItem = ({
   const auth = useSelector((state) => state.auth);
 
   return (
-    <div className='post rounded-lg p-1 my-1 text-light'>
+    <div className='post p-1 my-1 text-light'>
       <div>
         <Link to={`/profile/${user}`}>
           <img
