@@ -13,7 +13,7 @@ const PostItem = ({
   const auth = useSelector((state) => state.auth);
 
   return (
-    <div className='post bg-gradient-to-r from-orange-700/5 to-slate-950/95 hover:shadow-lg hover:shadow-black rounded-lg p-1 my-1 text-light'>
+    <div className='post rounded-lg p-1 my-1 text-light'>
       <div>
         <Link to={`/profile/${user}`}>
           <img
