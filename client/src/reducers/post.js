@@ -1,5 +1,6 @@
 import {
   GET_POSTS,
+  GET_POST,
   POST_ERROR,
   UPDATE_LIKES,
   DELETE_POST,
@@ -23,6 +24,12 @@ export const postReducer = (state = initialState, action) => {
         posts: payload.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         ),
+        loading: false
+      };
+    case GET_POST:
+      return {
+        ...state,
+        post: payload,
         loading: false
       };
     case ADD_POST:
