@@ -1,4 +1,10 @@
-import { GET_POSTS, POST_ERROR, UPDATE_LIKES, DELETE_POST } from '../actions/types';
+import {
+  GET_POSTS,
+  POST_ERROR,
+  UPDATE_LIKES,
+  DELETE_POST,
+  ADD_POST
+} from '../actions/types';
 
 const initialState = {
   posts: [],
@@ -14,7 +20,15 @@ export const postReducer = (state = initialState, action) => {
     case GET_POSTS:
       return {
         ...state,
-        posts: payload,
+        posts: payload.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        ),
+        loading: false
+      };
+    case ADD_POST:
+      return {
+        ...state,
+        posts: [payload, ...state.posts],
         loading: false
       };
     case DELETE_POST:

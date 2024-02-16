@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import PostItem from './PostItem';
+import PostForm from './PostForm';
 import { getPosts } from '../../actions/post';
 
 const Post = () => {
@@ -12,8 +13,6 @@ const Post = () => {
   useEffect(() => {
     dispatch(getPosts());
   }, [dispatch]);
-
-  // TODO: Sort posts by date, ascending
 
   return (
     <>
@@ -26,7 +25,7 @@ const Post = () => {
             <i className='fas fa-user-friends text-primary'></i> Welcome to the
             community
           </p>
-          {/* <PostForm /> */}
+          <PostForm />
           <div className='posts'>
             {posts.length > 0 ? (
               posts.map((post) => <PostItem key={post._id} post={post} />)

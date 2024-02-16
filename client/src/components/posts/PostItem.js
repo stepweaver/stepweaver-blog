@@ -12,16 +12,16 @@ const PostItem = ({
   const auth = useSelector((state) => state.auth);
 
   return (
-    <div className='post bg-gradient-to-r from-orange-700/5 to-slate-950/95 hover:shadow-lg hover:shadow-black rounded-xl p-1 my-1 text-light'>
+    <div className='post bg-gradient-to-r from-orange-700/5 to-slate-950/95 hover:shadow-lg hover:shadow-black rounded-lg p-1 my-1 text-light'>
       <div>
-        <a href='profile.html'>
+        <Link to={`/profile/${user}`}>
           <img
             className='round-img shadow-lg shadow-black mb-2'
             src={avatar}
             alt=''
           />
           <h4>{name}</h4>
-        </a>
+        </Link>
       </div>
       <div>
         <p className='my-1'>{text}</p>
