@@ -1,5 +1,5 @@
 [build]
-  command = "npm run netlify"
+  command = "npm run"
   publish = "client/public"
 
 [[redirects]]
