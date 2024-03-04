@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }) => {
     if (!auth.isAuthenticated && !loading) {
       navigate('/login');
     }
-  }, [auth, navigate]);
+  }, [auth, navigate, loading]);
 
   return auth.isAuthenticated && !loading ? children : null;
 };
